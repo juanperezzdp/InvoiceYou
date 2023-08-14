@@ -1,21 +1,23 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useInvoiceContext } from "../Context/InvoiceContext";
 
 const Client = () => {
-  const [invoiceItems, setInvoiceItems] = useState([]);
+  const [invoiceItemss, setInvoiceItemsss] = useState([]);
+  const { handleInputChangee } = useInvoiceContext();
 
   const handleInputChange = (index, field, value) => {
-    const newInvoiceItems = [...invoiceItems];
-    if (!newInvoiceItems[index]) {
-      newInvoiceItems[index] = {};
+    const newInvoiceItemss = [...invoiceItemss];
+    if (!newInvoiceItemss[index]) {
+      newInvoiceItemss[index] = {};
     }
-    newInvoiceItems[index][field] = value;
-    setInvoiceItems(newInvoiceItems);
+    newInvoiceItemss[index][field] = value;
+    setInvoiceItemsss(newInvoiceItemss);
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    // Do something with invoiceItems array, e.g. send it to an API or process it
-    console.log(invoiceItems);
+    console.log(invoiceItemss);
+    handleInputChangee(invoiceItemss);
   };
 
   return (
@@ -37,6 +39,17 @@ const Client = () => {
           />
         </div>
         <div className="flex items-center justify-between">
+          <label htmlFor="Direcion" className="block font-bold mb-1">
+            Direcion:
+          </label>
+          <input
+            type="text"
+            name="Direcion"
+            className="w-50 p-1 mb-2 border rounded-sm"
+            onChange={(e) => handleInputChange(0, "Direcion", e.target.value)}
+          />
+        </div>
+        <div className="flex items-center justify-between">
           <label htmlFor="Celular" className="block font-bold mb-1">
             Celular:
           </label>
@@ -49,24 +62,13 @@ const Client = () => {
         </div>
         <div className="flex items-center justify-between">
           <label htmlFor="Email" className="block font-bold mb-1">
-            Correo eletronico:
+            Email:
           </label>
           <input
-            type="tel"
+            type="email"
             name="Email"
             className="w-50 p-1 mb-2 border rounded-sm"
-            onChange={(e) => handleInputChange(0, "Celular", e.target.value)}
-          />
-        </div>
-        <div className="flex items-center justify-between">
-          <label htmlFor="Deuda" className="block font-bold mb-1">
-            Deuda:
-          </label>
-          <input
-            type="number"
-            name="Deuda"
-            className="w-50 p-1 mb-2 border rounded-sm"
-            onChange={(e) => handleInputChange(0, "Deuda", e.target.value)}
+            onChange={(e) => handleInputChange(0, "Email", e.target.value)}
           />
         </div>
         <button

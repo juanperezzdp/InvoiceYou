@@ -7,19 +7,22 @@ import Firm from "./components/Firm";
 import Capture from "./components/Capture";
 import ProductGuide from "./components/ProductGuide";
 import InvoiceTemplate from "./components/Invoice";
+import { InvoiceProvider } from "./Context/InvoiceContext";
 
 const App = () => {
   const { activeComponent } = useFloatingWindow();
 
   return (
     <>
-      <Navbar />
-      {activeComponent === null && <ProductGuide />}
-      {activeComponent === "cliente" && <Client />}
-      {activeComponent === "products" && <Products />}
-      {activeComponent === "foto" && <Capture />}
-      {activeComponent === "firma" && <Firm />}
-      <InvoiceTemplate />
+      <InvoiceProvider>
+        <Navbar />
+        {activeComponent === null && <ProductGuide />}
+        {activeComponent === "cliente" && <Client />}
+        {activeComponent === "products" && <Products />}
+        {activeComponent === "foto" && <Capture />}
+        {activeComponent === "firma" && <Firm />}
+        <InvoiceTemplate />
+      </InvoiceProvider>
     </>
   );
 };
