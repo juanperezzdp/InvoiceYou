@@ -1,8 +1,10 @@
 import { useState } from "react";
+import { useInvoiceContext } from "../Context/InvoiceContext";
 
 const Products = () => {
   const [selectedOption, setSelectedOption] = useState("");
   const [productsItems, setproductsItems] = useState([]);
+  const { handleInputProducts } = useInvoiceContext();
 
   const handleInputChange = (index, field, value) => {
     const newproductsItems = [...productsItems];
@@ -17,6 +19,7 @@ const Products = () => {
     event.preventDefault();
     // Do something with productsItems array, e.g. send it to an API or process it
     console.log(productsItems);
+    handleInputProducts(productsItems);
   };
 
   return (
@@ -31,6 +34,8 @@ const Products = () => {
             Productos:
           </label>
           <input
+            required
+            maxLength={25}
             type="text"
             name="Productos"
             className="w-50 p-1 mb-2 border rounded-sm"
@@ -42,6 +47,8 @@ const Products = () => {
             Pricio por unidad:
           </label>
           <input
+            required
+            min={0}
             type="number"
             name="Pricio por unidad"
             className="w-50 p-1 mb-2 border rounded-sm"
@@ -55,6 +62,8 @@ const Products = () => {
             Cantidad:
           </label>
           <input
+            required
+            min={0}
             type="number"
             name="Cantidad"
             className="w-50 p-1 mb-2 border rounded-sm"
@@ -100,11 +109,13 @@ const Products = () => {
               Descuento:
             </label>
             <input
+              required
+              min={0}
               type="number"
               name="Descuento"
               className="w-50 p-1 mb-2 border rounded-sm"
               onChange={(e) =>
-                handleInputChange(0, "descuento", e.target.value)
+                handleInputChange(0, "Descuento", e.target.value)
               }
             />
           </div>
@@ -114,17 +125,22 @@ const Products = () => {
             Informacion adicional:
           </label>
           <textarea
+            required
+            maxLength={100}
             name="description"
             cols="45"
             rows="5"
             className="border rounded-sm resize-none"
+            onChange={(e) =>
+              handleInputChange(0, "Descripcion", e.target.value)
+            }
           ></textarea>
         </div>
         <button
           type="submit"
           className="bg-emerald-800 hover:bg-emerald-700 text-white px-4 py-2 rounded w-full h-10 mt-5"
         >
-          Enviar
+          Agregar más productos
         </button>
         <div className="flex items-center justify-between mt-5 ">
           <label htmlFor="total">Total:</label>

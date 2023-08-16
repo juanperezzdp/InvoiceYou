@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useInvoiceContext } from "../Context/InvoiceContext";
 
 const Client = () => {
@@ -32,6 +32,7 @@ const Client = () => {
             Cliente:
           </label>
           <input
+            maxLength={25}
             type="text"
             name="Cliente"
             className="w-50 p-1 mb-2 border rounded-sm"
@@ -43,6 +44,7 @@ const Client = () => {
             Direcion:
           </label>
           <input
+            maxLength={30}
             type="text"
             name="Direcion"
             className="w-50 p-1 mb-2 border rounded-sm"
@@ -54,6 +56,7 @@ const Client = () => {
             Celular:
           </label>
           <input
+            maxLength={20}
             type="tel"
             name="Celular"
             className="w-50 p-1 mb-2 border rounded-sm"

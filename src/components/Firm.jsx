@@ -1,9 +1,11 @@
 import { useRef, useState } from "react";
 import SignatureCanvas from "react-signature-canvas";
+import { useInvoiceContext } from "../Context/InvoiceContext";
 
 const Firm = () => {
   const signatureCanvasRef = useRef(null);
   const [firmImageURL, setFirmImageURL] = useState(null);
+  const { setInvoiceFirm } = useInvoiceContext();
 
   const clearFirm = () => {
     signatureCanvasRef.current.clear();
@@ -12,8 +14,8 @@ const Firm = () => {
 
   const saveFirm = () => {
     const firmDataURL = signatureCanvasRef.current.toDataURL();
-    console.log(firmDataURL);
     setFirmImageURL(firmDataURL);
+    setInvoiceFirm(firmDataURL);
   };
 
   return (
@@ -27,7 +29,7 @@ const Firm = () => {
           canvasProps={{
             width: 450,
             height: 200,
-            className: "signature-canvas bg-black bg-opacity-5",
+            className: "signature-canvas bg-black bg-slate-200",
           }}
         />
       </div>
@@ -45,8 +47,6 @@ const Firm = () => {
           Guardar
         </button>
       </div>
-
-      {firmImageURL && <img src={firmImageURL} alt="Firma guardada" />}
     </div>
   );
 };
