@@ -9,6 +9,8 @@ export const InvoiceProvider = ({ children }) => {
   const [invoiceProducts, setInvoiceProducts] = useState([]);
   const [invoiceImg, setInvoiceImg] = useState([]);
   const [invoiceFirm, setInvoiceFirm] = useState([]);
+  const [invoiceEntity, setInvoiceEntity] = useState([]);
+  const [invoiceIva, setInvoiceIva] = useState([]);
 
   const handleInputChangee = (items) => {
     setInvoiceItems((prevInvoiceItems) => [...prevInvoiceItems, ...items]);
@@ -23,6 +25,13 @@ export const InvoiceProvider = ({ children }) => {
     setInvoiceImg((prevInvoiceImg) => [...prevInvoiceImg, { Img }]);
   };
 
+  const handleInputEntity = (Entity) => {
+    setInvoiceEntity((prevInvoiceEntity) => [...prevInvoiceEntity, ...Entity]);
+  };
+  const handleInputIva = (Iva) => {
+    setInvoiceIva((prevInvoiceIva) => [...prevInvoiceIva, ...Iva]);
+  };
+
   return (
     <InvoiceContext.Provider
       value={{
@@ -34,6 +43,10 @@ export const InvoiceProvider = ({ children }) => {
         handleInputImg,
         invoiceFirm,
         setInvoiceFirm,
+        invoiceEntity,
+        handleInputEntity,
+        invoiceIva,
+        handleInputIva,
       }}
     >
       {children}

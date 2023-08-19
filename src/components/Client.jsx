@@ -14,9 +14,8 @@ const Client = () => {
     setInvoiceItemsss(newInvoiceItemss);
   };
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    console.log(invoiceItemss);
+  const handleSubmit = (e) => {
+    e.preventDefault();
     handleInputChangee(invoiceItemss);
   };
 
@@ -26,12 +25,12 @@ const Client = () => {
         className="w-96 h-max  p-4 bg-white rounded-lg shadow-md"
         onSubmit={handleSubmit}
       >
-        x
         <div className="flex items-center justify-between">
           <label htmlFor="Cliente" className="block font-bold mb-1">
             Cliente:
           </label>
           <input
+            required
             maxLength={25}
             type="text"
             name="Cliente"
@@ -44,6 +43,7 @@ const Client = () => {
             Direcion:
           </label>
           <input
+            required
             maxLength={30}
             type="text"
             name="Direcion"
@@ -56,6 +56,7 @@ const Client = () => {
             Celular:
           </label>
           <input
+            required
             maxLength={20}
             type="tel"
             name="Celular"
@@ -68,6 +69,7 @@ const Client = () => {
             Email:
           </label>
           <input
+            required
             type="email"
             name="Email"
             className="w-50 p-1 mb-2 border rounded-sm"
@@ -76,7 +78,7 @@ const Client = () => {
         </div>
         <button
           type="submit"
-          className="bg-emerald-800 hover:bg-emerald-700 text-white px-4 py-2 rounded w-full"
+          className="bg-emerald-800 hover:bg-emerald-600 text-white px-4 py-2 rounded w-full"
         >
           Enviar
         </button>
