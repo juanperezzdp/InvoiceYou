@@ -11,7 +11,7 @@ const Iva = () => {
     if (!newIva[index]) {
       newIva[index] = {};
     }
-    newIva[index][field] = value;
+    newIva[index][field] = Number(value);
     setIva(newIva);
   };
 
@@ -36,13 +36,15 @@ const Iva = () => {
           </label>
           <input
             required
-            maxLength={25}
             type="number"
+            maxLength={15}
             id="entidad"
             className="w-50 p-1 mb-2 border rounded-sm"
-            onChange={(e) =>
-              handleChange(0, "ImpuestoValorAgregado", e.target.value)
-            }
+            onChange={(e) => {
+              const inputValue = e.target.value.slice(0, 3);
+              e.target.value = inputValue;
+              handleChange(0, "ImpuestoValorAgregado", inputValue);
+            }}
           />
         </div>
         <button

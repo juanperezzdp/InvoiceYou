@@ -1,25 +1,25 @@
 import { useRef, useState } from "react";
 import { useInvoiceContext } from "../Context/InvoiceContext";
 
-const Client = () => {
-  const [invoiceClient, setInvoiceClient] = useState([]);
-  const { handleInputChangee } = useInvoiceContext();
+const Empresa = () => {
+  const [invoiceEmpresa, setInvoiceEmpresa] = useState([]);
+  const { handleInputEmpresa } = useInvoiceContext();
   const formRef = useRef(null);
 
   const handleInputChange = (index, field, value) => {
-    const newInvoiceClient = [...invoiceClient];
-    if (!newInvoiceClient[index]) {
-      newInvoiceClient[index] = {};
+    const newInvoiceEmpresa = [...invoiceEmpresa];
+    if (!newInvoiceEmpresa[index]) {
+      newInvoiceEmpresa[index] = {};
     }
-    newInvoiceClient[index][field] = value;
-    setInvoiceClient(newInvoiceClient);
+    newInvoiceEmpresa[index][field] = value;
+    setInvoiceEmpresa(newInvoiceEmpresa);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    handleInputChangee(invoiceClient);
+    handleInputEmpresa(invoiceEmpresa);
     formRef.current.reset();
-    setInvoiceClient([]);
+    setInvoiceEmpresa([]);
   };
 
   return (
@@ -31,7 +31,7 @@ const Client = () => {
       >
         <div className="flex items-center justify-between">
           <label htmlFor="Cliente" className="block font-bold mb-1">
-            Cliente:
+            Empresa:
           </label>
           <input
             required
@@ -39,7 +39,7 @@ const Client = () => {
             type="text"
             name="Cliente"
             className="w-50 p-1 mb-2 border rounded-sm"
-            onChange={(e) => handleInputChange(0, "Cliente", e.target.value)}
+            onChange={(e) => handleInputChange(0, "Empresa", e.target.value)}
           />
         </div>
         <div className="flex items-center justify-between">
@@ -48,7 +48,7 @@ const Client = () => {
           </label>
           <input
             required
-            maxLength={32}
+            maxLength={30}
             type="text"
             name="Direcion"
             className="w-50 p-1 mb-2 border rounded-sm"
@@ -78,10 +78,28 @@ const Client = () => {
           </label>
           <input
             required
+            maxLength={30}
             type="email"
             name="Email"
             className="w-50 p-1 mb-2 border rounded-sm"
             onChange={(e) => handleInputChange(0, "Email", e.target.value)}
+          />
+        </div>
+        <div className="flex items-center justify-between">
+          <label htmlFor="Nit" className="block font-bold mb-1">
+            Nit:
+          </label>
+          <input
+            required
+            inputMode="numeric"
+            pattern="[0-9]*"
+            maxLength={15}
+            type="tel"
+            name="Nit"
+            className="w-50 p-1 mb-2 border rounded-sm"
+            onChange={(e) =>
+              handleInputChange(0, "Nit", Number(e.target.value))
+            }
           />
         </div>
         <button
@@ -95,4 +113,4 @@ const Client = () => {
   );
 };
 
-export default Client;
+export default Empresa;

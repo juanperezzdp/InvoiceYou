@@ -50,11 +50,16 @@ const Entidad = () => {
           <input
             required
             type="number"
+            inputMode="numeric"
+            pattern="[0-9]*"
+            maxLength={20}
             id="entidad"
             className="w-50 p-1 mb-2 border rounded-sm"
-            onChange={(e) =>
-              handleChange(0, "CodigoDeReferencia", e.target.value)
-            }
+            onChange={(e) => {
+              const inputValue = e.target.value.slice(0, 15);
+              e.target.value = inputValue;
+              handleChange(0, "CodigoDeReferencia", inputValue);
+            }}
           />
         </div>
 

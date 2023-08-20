@@ -5,15 +5,20 @@ const InvoiceContext = createContext();
 export const useInvoiceContext = () => useContext(InvoiceContext);
 
 export const InvoiceProvider = ({ children }) => {
+  const [invoiceEmpresa, setInvoiceEmpresa] = useState([]);
   const [invoiceItems, setInvoiceItems] = useState([]);
   const [invoiceProducts, setInvoiceProducts] = useState([]);
   const [invoiceImg, setInvoiceImg] = useState([]);
   const [invoiceFirm, setInvoiceFirm] = useState([]);
   const [invoiceEntity, setInvoiceEntity] = useState([]);
   const [invoiceIva, setInvoiceIva] = useState([]);
+  const [invoiceDescripcion, setInvoiceDescripcion] = useState([]);
 
+  const handleInputEmpresa = (Empresa) => {
+    setInvoiceEmpresa(Empresa);
+  };
   const handleInputChangee = (items) => {
-    setInvoiceItems((prevInvoiceItems) => [...prevInvoiceItems, ...items]);
+    setInvoiceItems(items);
   };
   const handleInputProducts = (Products) => {
     setInvoiceProducts((prevInvoiceProducts) => [
@@ -26,15 +31,20 @@ export const InvoiceProvider = ({ children }) => {
   };
 
   const handleInputEntity = (Entity) => {
-    setInvoiceEntity((prevInvoiceEntity) => [...prevInvoiceEntity, ...Entity]);
+    setInvoiceEntity(Entity);
   };
   const handleInputIva = (Iva) => {
-    setInvoiceIva((prevInvoiceIva) => [...prevInvoiceIva, ...Iva]);
+    setInvoiceIva(Iva);
+  };
+  const handleInputDescripcion = (Descripcion) => {
+    setInvoiceDescripcion(Descripcion);
   };
 
   return (
     <InvoiceContext.Provider
       value={{
+        invoiceEmpresa,
+        handleInputEmpresa,
         invoiceItems,
         handleInputChangee,
         invoiceProducts,
@@ -47,6 +57,8 @@ export const InvoiceProvider = ({ children }) => {
         handleInputEntity,
         invoiceIva,
         handleInputIva,
+        invoiceDescripcion,
+        handleInputDescripcion,
       }}
     >
       {children}

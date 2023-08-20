@@ -44,7 +44,7 @@ const Products = () => {
       productsItems[0]?.Descuento || 0
     );
 
-    handleInputChange(0, "Total", calculatedTotal);
+    handleInputChange(0, "Total", Number(calculatedTotal));
 
     formRef.current.reset();
     setproductsItems([]);
@@ -52,7 +52,7 @@ const Products = () => {
   };
 
   return (
-    <div className="flex p-4 z-50 fixed top-2 left-40 max-w-md">
+    <div className="flex p-4  fixed top-2 left-40 max-w-md">
       <form
         ref={formRef}
         className="w-96 h-max  p-4 bg-white rounded-lg shadow-md"
@@ -81,9 +81,11 @@ const Products = () => {
             type="number"
             name="Precio por unidad"
             className="w-50 p-1 mb-2 border rounded-sm"
-            onChange={(e) =>
-              handleInputChange(0, "PricioPorUnidad", e.target.value)
-            }
+            onChange={(e) => {
+              const inputValue = e.target.value.slice(0, 12);
+              e.target.value = inputValue;
+              handleInputChange(0, "PricioPorUnidad", Number(inputValue));
+            }}
           />
         </div>
         <div className="flex items-center justify-between">
@@ -96,7 +98,11 @@ const Products = () => {
             type="number"
             name="Cantidad"
             className="w-50 p-1 mb-2 border rounded-sm"
-            onChange={(e) => handleInputChange(0, "Cantidad", e.target.value)}
+            onChange={(e) => {
+              const inputValue = e.target.value.slice(0, 5);
+              e.target.value = inputValue;
+              handleInputChange(0, "Cantidad", Number(inputValue));
+            }}
           />
         </div>
         <div className="flex items-center justify-between">
@@ -143,28 +149,14 @@ const Products = () => {
               type="number"
               name="Descuento"
               className="w-50 p-1 mb-2 border rounded-sm"
-              onChange={(e) =>
-                handleInputChange(0, "Descuento", e.target.value)
-              }
+              onChange={(e) => {
+                const inputValue = e.target.value.slice(0, 3);
+                e.target.value = inputValue;
+                handleInputChange(0, "Descuento", Number(inputValue));
+              }}
             />
           </div>
         )}
-        <div>
-          <label htmlFor="description" className="block font-bold mb-1">
-            Informacion adicional:
-          </label>
-          <textarea
-            required
-            maxLength={100}
-            name="description"
-            cols="45"
-            rows="5"
-            className="border rounded-sm resize-none"
-            onChange={(e) =>
-              handleInputChange(0, "Descripcion", e.target.value)
-            }
-          ></textarea>
-        </div>
         <button
           type="submit"
           className="bg-emerald-800 hover:bg-emerald-600 text-white px-4 py-2 rounded w-full h-10 mt-5"

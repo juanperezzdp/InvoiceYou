@@ -4,6 +4,8 @@ import { PiSignatureDuotone } from "react-icons/pi";
 import { TbPhotoPlus } from "react-icons/tb";
 import { FaPercentage } from "react-icons/fa";
 import { BiSolidBank } from "react-icons/bi";
+import { BsChatText } from "react-icons/bs";
+import { MdAddBusiness } from "react-icons/md";
 import { useFloatingWindow } from "../Context/ContextComponents";
 
 const Navbar = () => {
@@ -14,8 +16,15 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="flex flex-col h-screen w-40 bg-indigo-700">
+    <nav className="flex flex-col h-[45rem] w-40 bg-indigo-700">
       <div className="gap-2 mt-8">
+        <div
+          onClick={() => handleClick("empresa")}
+          className="flex items-center pl-4 text-white gap-1 hover:bg-indigo-600 cursor-pointer h-12 w-40"
+        >
+          <MdAddBusiness className="fas fa-heart text-2xl" />
+          <h3>Empresa</h3>
+        </div>
         <div
           onClick={() => handleClick("cliente")}
           className="flex items-center pl-4 text-white gap-1 hover:bg-indigo-600 cursor-pointer h-12 w-40"
@@ -57,6 +66,13 @@ const Navbar = () => {
         >
           <BiSolidBank className="fas fa-heart text-2xl" />
           <h3>Entidad</h3>
+        </div>
+        <div
+          onClick={() => handleClick("descripcion")}
+          className="flex items-center pl-4 text-white gap-1 hover:bg-indigo-600 cursor-pointer h-12 w-40"
+        >
+          <BsChatText className="fas fa-heart text-2xl" />
+          <h3>Descripción</h3>
         </div>
       </div>
     </nav>

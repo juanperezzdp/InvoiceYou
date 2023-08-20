@@ -4,7 +4,7 @@ import Gif from "../img/animation.mp4";
 const ProductGuide = () => {
   return (
     <>
-      <div className="overflow-hidden flex flex-col w-[20rem] h-[95vh] items-center gap-2 bg-white rounded-lg shadow-md p-4 z-50 fixed top-1 left-40 mt-2 ml-4">
+      <div className="overflow-hidden flex flex-col w-[20rem] h-[97vh] items-center bg-white rounded-lg shadow-md p-4 z-50 fixed top-1 left-40 mt-2 ml-4">
         <div>
           <h6 className="text-2xl text-indigo-900">
             ¡Bienvenido a InvoiceYou!
@@ -13,6 +13,11 @@ const ProductGuide = () => {
         </div>
 
         <div>
+          <p className="mb-2 text-[10px] text-justify">
+            En la sección "Empresa", ingrese en el formulario los datos
+            completos de la empresa.
+          </p>
+
           <p className="mb-2 text-[10px] text-justify">
             En la sección "Cliente", ingrese en el formulario los datos
             completos del destinatario de la facturación.
