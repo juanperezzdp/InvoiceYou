@@ -94,7 +94,7 @@ const Invoice = () => {
     <>
       <div
         onClick={handleGeneratePDF}
-        className="flex items-center justify-center z-40 p-2 w-36 gap-1 rounded-3xl text-white bottom-4 right-2 fixed bg-indigo-700"
+        className="flex items-center cursor-pointer justify-center z-40 p-2 w-36 gap-1 rounded-3xl text-white bottom-4 right-2 fixed bg-indigo-800 hover:bg-indigo-600"
       >
         <FiSave />
         <p className="text-sm ">Descarga en PDF</p>
