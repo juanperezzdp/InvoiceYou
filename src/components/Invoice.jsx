@@ -97,7 +97,7 @@ const Invoice = () => {
         className="flex items-center justify-center z-40 p-2 w-36 gap-1 rounded-3xl text-white bottom-4 right-2 fixed bg-indigo-700"
       >
         <FiSave />
-        <button className="text-sm ">Descarga en PDF</button>
+        <p className="text-sm ">Descarga en PDF</p>
       </div>
 
       <div
