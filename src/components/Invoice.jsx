@@ -80,11 +80,7 @@ const Invoice = () => {
       const imageData = canvas.toDataURL("image/jpeg", 1.0);
       pdf.addImage(imageData, "JPEG", 10, 10, 190, 270);
 
-      pdf.save(
-        `${InvoiceClient.Cliente}-${
-          InvoiceIva.ImpuestoValorAgregado
-        }-${getFormattedDate()}`
-      );
+      pdf.save(`${InvoiceClient.Cliente}-${getFormattedDate()}`);
     } catch (error) {
       alert("Complete todos los campos de faturacion");
     }
@@ -108,10 +104,16 @@ const Invoice = () => {
           <div className=" mb-2 flex justify-between">
             <div>
               <p className="text-[10px] flex gap-1 items-end">
-                Codigo: <p className="text-green-700 text-[15px]"> {newCode}</p>
+                Codigo:{" "}
+                <p className="text-green-700 text-[12px] // sm:text-[15px] ">
+                  {" "}
+                  {newCode}
+                </p>
               </p>
-              <p className="text-[10px]">Fecha: {getFormattedDate()}</p>
-              <div className="text-[10px] w-40">
+              <p className="text-[9px] // sm:text-[10px]">
+                Fecha: {getFormattedDate()}
+              </p>
+              <div className="text-[9px] w-40 // sm:text-[10px]">
                 <p>Empresa: {InvoiceEmpresa && InvoiceEmpresa.Empresa}</p>
                 <p>Dirección: {InvoiceEmpresa && InvoiceEmpresa.Direcion}</p>
                 <p>Celular: {InvoiceEmpresa && InvoiceEmpresa.Celular}</p>
@@ -121,7 +123,7 @@ const Invoice = () => {
             </div>
             <div className="text-[10px]">
               <h2 className="text-sm font-bold">Cliente</h2>
-              <div>
+              <div className="text-[9px] // sm:text-[10px]">
                 <p>Nombre: {InvoiceClient && InvoiceClient.Cliente}</p>
                 <p>Dirección: {InvoiceClient && InvoiceClient.Direcion}</p>
                 <p>Celular: {InvoiceClient && InvoiceClient.Celular}</p>
@@ -131,7 +133,7 @@ const Invoice = () => {
           </div>
         </div>
 
-        <div className="h-[20rem]">
+        <div className="h-[15rem] // sm:h-[20rem] ">
           <InvoiceProducts />
         </div>
 
@@ -139,10 +141,10 @@ const Invoice = () => {
           <div className=" flex gap-2 ">
             <div>
               <p className="text-xs font-semibold">Instrucciones de pagos</p>
-              <p className="text-[10px]">
+              <p className="text-[9px] // sm:text-[10px]">
                 A traves de {invoiceEntity[0]?.EntidadBancaria}
               </p>
-              <p className="text-[10px]">
+              <p className="text-[9px] // sm:text-[10px]">
                 Codigo de referencia:
                 {invoiceEntity[0]?.CodigoDeReferencia}
               </p>
@@ -151,16 +153,18 @@ const Invoice = () => {
           <div className="bg-slate-100 pl-2 border-b-4">
             <div className="flex gap-3 w-40">
               <div className="flex gap-1">
-                <h3 className="text-xs font-semibold">Total parcial</h3>
-                <p className="text-xs">{`$${totalWithoutDiscount.toLocaleString(
+                <h3 className="text-[9px] font-semibold // sm:text-xs ">
+                  Total parcial
+                </h3>
+                <p className="text-[9px] // sm:text-xs">{`$${totalWithoutDiscount.toLocaleString(
                   "en-CO"
                 )}`}</p>
               </div>
             </div>
 
             <div className="flex gap-1">
-              <h3 className="text-xs font-semibold">IVA</h3>
-              <p className="text-[10px]">
+              <h3 className="font-semibold text-[9px] // sm:text-xs ">IVA</h3>
+              <p className="text-[9px] // sm:text-xs ">
                 {InvoiceIva
                   ? `( ${InvoiceIva.ImpuestoValorAgregado}% )`
                   : "( 0% )"}
@@ -168,8 +172,8 @@ const Invoice = () => {
             </div>
 
             <div className="flex gap-1">
-              <h3 className="text-ms font-semibold">Total</h3>
-              <p className="text-ms">
+              <h3 className="text-xs font-semibold  // sm:text-sm">Total</h3>
+              <p className="text-xs // sm:text-ms">
                 {`$${totalPriceAfterDiscount.toLocaleString("en-CO")}`}
               </p>
             </div>
@@ -178,7 +182,7 @@ const Invoice = () => {
 
         <div className=" flex justify-between mb-1 mt-1 h-18">
           <div className=" w-60 overflow-hidden flex">
-            <p className="text-[0.5rem]">
+            <p className="text-[7px] // sm:text-[0.5rem]">
               {invoiceDescripcion[0]?.Descripcion}
             </p>
           </div>
@@ -187,11 +191,13 @@ const Invoice = () => {
               {invoiceFirm && invoiceFirm.length > 0 ? (
                 <img className="h-10" src={invoiceFirm} alt="Firm" />
               ) : (
-                <p className=" text-[10px]">Agrega una Firma</p>
+                <p className=" text-[7px] // sm:text-xs ">Agrega una Firma</p>
               )}
             </div>
-            <p className="text-[0.6rem]">Fecha firmada</p>
-            <p className="text-[0.6rem]">{getFormattedDate()}</p>
+            <p className="text-[9px] // sm:text-[0.6rem]">Fecha firmada</p>
+            <p className="text-[9px] // sm:text-[0.6rem]">
+              {getFormattedDate()}
+            </p>
           </div>
         </div>
 
@@ -201,7 +207,11 @@ const Invoice = () => {
           {invoiceImg &&
             invoiceImg.slice(-4).map((data, index) => (
               <div key={index}>
-                <img className="w-[7rem] " src={data.Img} alt="Img" />
+                <img
+                  className="h-[4rem] // sm:h-auto sm:w-[7rem]"
+                  src={data.Img}
+                  alt="Img"
+                />
               </div>
             ))}
         </div>

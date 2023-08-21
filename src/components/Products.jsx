@@ -117,8 +117,8 @@ const Products = () => {
               }}
               className={`w-1/2 p-2 ${
                 selectedOption === "Porcentaje"
-                  ? " bg-emerald-600 text-sm text-white w-auto rounded-xl h-9 font-thin cursor-pointer"
-                  : "w-auto text-sm bg-slate-400 hover:bg-emerald-600 text-white rounded-xl h-9 font-thin cursor-pointer"
+                  ? "w-24 text-center bg-emerald-600 text-sm text-white rounded-xl h-9 font-thin cursor-pointer"
+                  : "w-24 text-center text-sm bg-slate-400 hover:bg-emerald-600 text-white rounded-xl h-9 font-thin cursor-pointer"
               }`}
             >
               Descuento
@@ -131,8 +131,8 @@ const Products = () => {
               }}
               className={`w-1/2 p-2 ${
                 selectedOption === "Tarifa plana"
-                  ? "bg-emerald-600 text-sm text-white w-auto rounded-xl h-9 font-thin cursor-pointer"
-                  : " w-auto bg-slate-400 text-sm hover:bg-emerald-600 text-white rounded-xl h-9 font-thin cursor-pointer"
+                  ? "w-24 text-center bg-emerald-600 text-sm text-white rounded-xl h-9 font-thin cursor-pointer"
+                  : " w-24 text-center bg-slate-400 text-sm hover:bg-emerald-600 text-white rounded-xl h-9 font-thin cursor-pointer"
               }`}
             >
               Tarifa plana
