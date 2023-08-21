@@ -94,7 +94,7 @@ const Invoice = () => {
     <>
       <div
         onClick={handleGeneratePDF}
-        className="flex items-center cursor-pointer justify-center z-40 p-2 w-36 gap-1 rounded-3xl text-white bottom-4 right-2 fixed bg-indigo-800 hover:bg-indigo-600"
+        className="flex items-center cursor-pointer justify-center z-40 p-2 w-36 gap-1 rounded-3xl text-white right-0 h-8 fixed top-1 bg-indigo-800 hover:bg-indigo-600 // sm:h-10 sm:bottom-4 sm:right-4 sm:top-auto"
       >
         <FiSave />
         <p className="text-sm ">Descarga en PDF</p>
@@ -102,7 +102,7 @@ const Invoice = () => {
 
       <div
         ref={invoiceContainerRef}
-        className="absolute h-[44rem] top-2 right-10 xl:right-40 bg-white w-[30rem] pl-6 pr-6 border shadow-md"
+        className="absolute h-[34rem] top-2 sm:right-10 right-auto bg-white w-[22rem] pl-6 pr-6 border shadow-md // sm:w-[30rem] xl:right-40 sm:h-[44rem]"
       >
         <div>
           <div className=" mb-2 flex justify-between">

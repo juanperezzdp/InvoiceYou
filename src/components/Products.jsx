@@ -52,7 +52,7 @@ const Products = () => {
   };
 
   return (
-    <div className="flex p-4  fixed top-2 left-40 max-w-md">
+    <div className="flex justify-center w-[100%] p-4 z-10 fixed top-8  // sm:top-4 sm:justify-start sm:w-auto sm:left-40 ">
       <form
         ref={formRef}
         className="w-96 h-max  p-4 bg-white rounded-lg shadow-md"

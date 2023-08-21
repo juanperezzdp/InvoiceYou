@@ -3,8 +3,8 @@ import Gif from "../img/animation.mp4";
 
 const ProductGuide = () => {
   return (
-    <>
-      <div className="overflow-hidden flex flex-col w-[20rem] h-[97vh] items-center bg-white rounded-lg shadow-md p-4 z-50 fixed top-1 left-40 mt-2 ml-4">
+    <div className="flex justify-center w-[100%] p-4 z-10 fixed top-2  // sm:justify-start sm:w-auto sm:left-40 ">
+      <div className="overflow-hidden flex flex-col w-[20rem] h-[34.5rem] items-center bg-white rounded-lg shadow-md p-4 z-10 fixed top-4 mt-2  // sm:ml-4 sm:left-40 sm:top-2">
         <div>
           <h6 className="text-2xl text-indigo-900">
             ¡Bienvenido a InvoiceYou!
@@ -57,7 +57,7 @@ const ProductGuide = () => {
           </video>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
