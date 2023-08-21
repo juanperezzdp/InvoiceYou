@@ -7,7 +7,7 @@ const InvoiceProducts = () => {
   return (
     <div className="overflow-x-auto">
       <table className="h-full text-sm text-left dark:text-gray-400 min-w-full">
-        <thead className="w-96 bg-sky-100">
+        <thead className="w-96 bg-indigo-100">
           <tr className="border-b hover:table-fixed  ">
             <th className="pt-2 pb-2 text-center text-[10px]">Producto</th>
             <th className="pt-2 pb-2 text-center text-[10px]">Cantidad</th>
@@ -34,7 +34,10 @@ const InvoiceProducts = () => {
                         Number(data.PricioPorUnidad).toLocaleString("en-CO")}
                     </td>
                     <td className="pt-1 pb-1 text-center text-[7px]">
-                      {data.TipoDeDescuento ? data.Descuento : 0}
+                      {(data.TipoDeDescuento === "Porcentaje" &&
+                        data.Descuento) ||
+                        (data.TipoDeDescuento === "TarifaPlana" && 0) ||
+                        (data.TipoDeDescuento === undefined && 0)}
                     </td>
                     <td className="pt-1 pb-1 text-center text-[7px]">
                       {data.Total !== undefined

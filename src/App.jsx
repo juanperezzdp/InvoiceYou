@@ -1,4 +1,3 @@
-import React from "react";
 import Navbar from "./components/Navbar";
 import Empresa from "./components/Empresa";
 import Client from "./components/Client";
@@ -30,6 +29,7 @@ const App = () => {
         {activeComponent === "iva" && <Iva />}
         {activeComponent === "entidad" && <Entidad />}
         {activeComponent === "descripcion" && <Descripcion />}
+
         <Invoice />
       </InvoiceProvider>
     </>

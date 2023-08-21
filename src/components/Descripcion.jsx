@@ -37,7 +37,7 @@ const Descripcion = () => {
           </label>
           <textarea
             required
-            maxLength={200}
+            maxLength={300}
             name="description"
             cols="45"
             rows="5"

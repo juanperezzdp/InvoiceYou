@@ -56,7 +56,7 @@ const Entidad = () => {
             id="entidad"
             className="w-50 p-1 mb-2 border rounded-sm"
             onChange={(e) => {
-              const inputValue = e.target.value.slice(0, 15);
+              const inputValue = Number(e.target.value.slice(0, 15));
               e.target.value = inputValue;
               handleChange(0, "CodigoDeReferencia", inputValue);
             }}

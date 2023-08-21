@@ -1,6 +1,9 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useInvoiceContext } from "../Context/InvoiceContext";
 import InvoiceProducts from "../components/InvoiceProducts";
+import jsPDF from "jspdf";
+import html2canvas from "html2canvas";
+import { FiSave } from "react-icons/fi";
 
 const Invoice = () => {
   const {
@@ -13,10 +16,12 @@ const Invoice = () => {
     invoiceIva,
     invoiceDescripcion,
   } = useInvoiceContext();
+
   const [EmpresaInvoice, setEmpresaInvoice] = useState(0);
   const [ClientInvoice, setClientInvoice] = useState(0);
   const [IvaInvoice, setIvaInvoice] = useState(0);
   const [newCode, setNewCode] = useState(0);
+  const invoiceContainerRef = useRef(null);
 
   const InvoiceEmpresa = invoiceEmpresa[EmpresaInvoice];
   const InvoiceClient = invoiceItems[ClientInvoice];
@@ -53,13 +58,54 @@ const Invoice = () => {
   const discount = (totalWithoutDiscount * ivaPercentage) / 100;
   const totalPriceAfterDiscount = totalWithoutDiscount - discount;
 
-  console.log("jablame:", invoiceDescripcion);
+  const handleGeneratePDF = async () => {
+    const input = invoiceContainerRef.current;
+
+    try {
+      if (!input) {
+        return;
+      }
+
+      const canvas = await html2canvas(input, {
+        scale: 2,
+        useCORS: true,
+      });
+
+      const pdf = new jsPDF({
+        orientation: "portrait",
+        unit: "mm",
+        format: "a4",
+      });
+
+      const imageData = canvas.toDataURL("image/jpeg", 1.0);
+      pdf.addImage(imageData, "JPEG", 10, 10, 190, 270);
+
+      pdf.save(
+        `${InvoiceClient.Cliente}-${
+          InvoiceIva.ImpuestoValorAgregado
+        }-${getFormattedDate()}`
+      );
+    } catch (error) {
+      alert("Complete todos los campos de faturacion");
+    }
+  };
 
   return (
     <>
-      <div className="absolute h-[40rem] top-2 right-4 xl:right-40 bg-white w-1/3 pl-6 pr-6 border shadow-md">
+      <div
+        onClick={handleGeneratePDF}
+        className="flex items-center justify-center z-40 p-2 w-36 gap-1 rounded-3xl text-white bottom-4 right-2 fixed bg-indigo-700"
+      >
+        <FiSave />
+        <button className="text-sm ">Descarga en PDF</button>
+      </div>
+
+      <div
+        ref={invoiceContainerRef}
+        className="absolute h-[44rem] top-2 right-10 xl:right-40 bg-white w-[30rem] pl-6 pr-6 border shadow-md"
+      >
         <div>
-          <div className="mt-4 flex justify-between">
+          <div className=" mb-2 flex justify-between">
             <div>
               <p className="text-[10px] flex gap-1 items-end">
                 Codigo: <p className="text-green-700 text-[15px]"> {newCode}</p>
@@ -85,7 +131,7 @@ const Invoice = () => {
           </div>
         </div>
 
-        <div className="h-60">
+        <div className="h-[20rem]">
           <InvoiceProducts />
         </div>
 
@@ -94,11 +140,11 @@ const Invoice = () => {
             <div>
               <p className="text-xs font-semibold">Instrucciones de pagos</p>
               <p className="text-[10px]">
-                A traves de {invoiceEntity && invoiceEntity.EntidadBancaria}
+                A traves de {invoiceEntity[0]?.EntidadBancaria}
               </p>
               <p className="text-[10px]">
-                Codigo de referencia
-                {invoiceEntity && invoiceEntity.CodigoDeReferencia}
+                Codigo de referencia:
+                {invoiceEntity[0]?.CodigoDeReferencia}
               </p>
             </div>
           </div>
@@ -130,27 +176,32 @@ const Invoice = () => {
           </div>
         </div>
 
-        <div className=" flex flex-col items-end justify-end h-18">
-          <div className="border-b-slate-800 border-b-2">
-            {invoiceFirm && invoiceFirm.length > 0 ? (
-              <img className="h-10" src={invoiceFirm} alt="Firm" />
-            ) : (
-              <p className=" text-[10px]">Agrega una Firma</p>
-            )}
+        <div className=" flex justify-between mb-1 mt-1 h-18">
+          <div className=" w-60 overflow-hidden flex">
+            <p className="text-[0.5rem]">
+              {invoiceDescripcion[0]?.Descripcion}
+            </p>
           </div>
-          <p className="text-[0.6rem]">Fecha firmada</p>
-          <p className="text-[0.6rem]">{getFormattedDate()}</p>
+          <div>
+            <div className="border-b-slate-800 border-b-2">
+              {invoiceFirm && invoiceFirm.length > 0 ? (
+                <img className="h-10" src={invoiceFirm} alt="Firm" />
+              ) : (
+                <p className=" text-[10px]">Agrega una Firma</p>
+              )}
+            </div>
+            <p className="text-[0.6rem]">Fecha firmada</p>
+            <p className="text-[0.6rem]">{getFormattedDate()}</p>
+          </div>
         </div>
 
-        <div className=" max-h-20 overflow-hidden  bg-slate-600 flex">
-          <p className="text-xs">{invoiceDescripcion[0]?.Descripcion}</p>
-        </div>
+        <hr className="mb-1" />
 
         <div className=" flex gap-2">
           {invoiceImg &&
             invoiceImg.slice(-4).map((data, index) => (
               <div key={index}>
-                <img className="h-12 " src={data.Img} alt="Img" />
+                <img className="w-[7rem] " src={data.Img} alt="Img" />
               </div>
             ))}
         </div>

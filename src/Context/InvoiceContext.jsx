@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState } from "react";
+import { createContext, useContext, useState } from "react";
 
 const InvoiceContext = createContext();
 
@@ -21,10 +21,14 @@ export const InvoiceProvider = ({ children }) => {
     setInvoiceItems(items);
   };
   const handleInputProducts = (Products) => {
-    setInvoiceProducts((prevInvoiceProducts) => [
-      ...prevInvoiceProducts,
-      ...Products.map((product) => ({ ...product })),
-    ]);
+    if (invoiceProducts.length < 9) {
+      setInvoiceProducts((prevInvoiceProducts) => [
+        ...prevInvoiceProducts,
+        ...Products.map((product) => ({ ...product })),
+      ]);
+    } else {
+      alert("Solo puedes agregar 9 productos");
+    }
   };
   const handleInputImg = (Img) => {
     setInvoiceImg((prevInvoiceImg) => [...prevInvoiceImg, { Img }]);

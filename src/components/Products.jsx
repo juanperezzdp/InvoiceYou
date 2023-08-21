@@ -14,7 +14,6 @@ const Products = () => {
     }
     newproductsItems[index][field] = value;
 
-    // Calculate and update the new total
     const calculatedTotal = calculateTotal(
       newproductsItems[index]?.PricioPorUnidad || 0,
       newproductsItems[index]?.Cantidad || 1,
@@ -37,6 +36,7 @@ const Products = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
     handleInputProducts(productsItems);
     const calculatedTotal = calculateTotal(
       productsItems[0]?.PricioPorUnidad || 0,
@@ -121,11 +121,12 @@ const Products = () => {
                   : "w-auto text-sm bg-slate-400 hover:bg-emerald-600 text-white rounded-xl h-9 font-thin cursor-pointer"
               }`}
             >
-              Porcentaje
+              Descuento
             </div>
             <div
+              required
               onClick={() => {
-                handleInputChange(0, "TipoDeDescuento", "Tarifa plana");
+                handleInputChange(0, "TipoDeDescuento", "TarifaPlana");
                 setSelectedOption("Tarifa plana");
               }}
               className={`w-1/2 p-2 ${

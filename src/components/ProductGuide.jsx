@@ -25,7 +25,7 @@ const ProductGuide = () => {
 
           <p className="mb-2 text-[10px] text-justify">
             Dentro de la sección "Productos", por favor complete el formulario
-            con los datos de los productos, considerando que habrá solo 6
+            con los datos de los productos, considerando que habrá solo 9
             productos en la facturación.
           </p>
 

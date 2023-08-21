@@ -19,7 +19,6 @@ const Capture = () => {
 
   const capturePhoto = () => {
     if (photosTaken < 4) {
-      // Tomar solo 4 fotos
       const canvas = document.createElement("canvas");
       canvas.width = videoRef.current.videoWidth;
       canvas.height = videoRef.current.videoHeight;
