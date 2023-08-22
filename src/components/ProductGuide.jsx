@@ -17,7 +17,7 @@ const ProductGuide = () => {
           <h6 className="text-2xl text-indigo-900">
             ¡Bienvenido a InvoiceYou!
           </h6>
-          <p className="text-xs text-center">Guia practica de faturaciones</p>
+          <p className="text-xs text-center">Guia practica de facturaciones</p>
         </div>
 
         <div>

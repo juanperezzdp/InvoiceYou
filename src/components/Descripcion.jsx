@@ -1,9 +1,12 @@
 import { useRef, useState } from "react";
 import { useInvoiceContext } from "../Context/InvoiceContext";
+import { MdOutlineClear } from "react-icons/md";
+import { useFloatingWindow } from "../Context/ContextComponents";
 
 const Descripcion = () => {
   const [Descripcion, setDescripcion] = useState([]);
   const { handleInputDescripcion } = useInvoiceContext();
+  const { setActiveComponent } = useFloatingWindow();
   const formRef = useRef(null);
 
   const handleChange = (index, field, value) => {
@@ -31,6 +34,12 @@ const Descripcion = () => {
         className="w-80 h-max p-4 border-[1px] border-gray-400 bg-white rounded-lg shadow-md // sm:w-96"
         onSubmit={handleSubmit}
       >
+        <div className="max-w-full flex justify-end // sm:hidden">
+          <MdOutlineClear
+            onClick={() => setActiveComponent("x")}
+            className="text-xl text-red-700 mt-[-0.5rem] mb-2 flex justify-end "
+          />
+        </div>
         <div>
           <label htmlFor="description" className="block font-bold mb-1">
             Informacion adicional:
