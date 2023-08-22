@@ -1,10 +1,13 @@
 import { useRef, useState } from "react";
 import { useInvoiceContext } from "../Context/InvoiceContext";
+import { MdOutlineClear } from "react-icons/md";
+import { useFloatingWindow } from "../Context/ContextComponents";
 
 const Products = () => {
   const [selectedOption, setSelectedOption] = useState("");
   const [productsItems, setproductsItems] = useState([]);
   const { handleInputProducts } = useInvoiceContext();
+  const { setActiveComponent } = useFloatingWindow();
   const formRef = useRef(null);
 
   const handleInputChange = (index, field, value) => {
@@ -55,9 +58,15 @@ const Products = () => {
     <div className="flex justify-center w-[100%] p-4 z-10 fixed top-8  // sm:top-4 sm:justify-start sm:w-auto sm:left-40 ">
       <form
         ref={formRef}
-        className="w-96 h-max  p-4 bg-white rounded-lg shadow-md"
+        className="w-96 h-max border-[1px] border-gray-400 p-4 bg-white rounded-lg shadow-md"
         onSubmit={handleSubmit}
       >
+        <div className="max-w-full flex justify-end // sm:hidden">
+          <MdOutlineClear
+            onClick={() => setActiveComponent("x")}
+            className="text-xl text-red-700 mt-[-0.5rem] mb-2 flex justify-end "
+          />
+        </div>
         <div className="flex items-center justify-between">
           <label htmlFor="Productos" className="block font-bold mb-1">
             Productos:

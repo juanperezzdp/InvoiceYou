@@ -82,7 +82,7 @@ const Invoice = () => {
 
       pdf.save(`${InvoiceClient.Cliente}-${getFormattedDate()}`);
     } catch (error) {
-      alert("Complete todos los campos de faturacion");
+      alert("Complete todos los campos de facturacion");
     }
   };
 
@@ -90,10 +90,10 @@ const Invoice = () => {
     <>
       <div
         onClick={handleGeneratePDF}
-        className="flex items-center cursor-pointer justify-center z-40 p-2 w-36 gap-1 rounded-3xl text-white right-0 h-8 fixed top-1 bg-indigo-800 hover:bg-indigo-600 // sm:h-10 sm:bottom-4 sm:right-4 sm:top-auto"
+        className="flex items-center cursor-pointer justify-center z-40 p-2 w-36 gap-1 rounded-3xl text-white right-0 h-6 fixed top-1 bg-indigo-800 hover:bg-indigo-600 // sm:h-10 sm:bottom-4 sm:right-4 sm:top-auto"
       >
         <FiSave />
-        <p className="text-sm ">Descarga en PDF</p>
+        <p className="text-[0.6rem] sm:text-sm ">Descarga en PDF</p>
       </div>
 
       <div

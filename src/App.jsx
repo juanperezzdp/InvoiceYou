@@ -26,9 +26,9 @@ const App = () => {
         {activeComponent === "foto" && <Capture />}
         {activeComponent === "firma" && <Firm />}
         {activeComponent === "iva" && <Iva />}
-        {activeComponent === "iva" && <Iva />}
         {activeComponent === "entidad" && <Entidad />}
         {activeComponent === "descripcion" && <Descripcion />}
+        {activeComponent === "x" && null}
 
         <Invoice />
       </InvoiceProvider>

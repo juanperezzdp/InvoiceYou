@@ -1,9 +1,12 @@
-import React, { useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { useInvoiceContext } from "../Context/InvoiceContext";
+import { useFloatingWindow } from "../Context/ContextComponents";
+import { MdOutlineClear } from "react-icons/md";
 
 const Iva = () => {
   const [iva, setIva] = useState([]);
   const { handleInputIva } = useInvoiceContext();
+  const { setActiveComponent } = useFloatingWindow();
   const formRef = useRef(null);
 
   const handleChange = (index, field, value) => {
@@ -24,12 +27,18 @@ const Iva = () => {
   };
 
   return (
-    <div className="flex justify-center w-[100%] p-4 z-10 fixed top-8 // sm:top-4 sm:justify-start sm:w-auto sm:left-40">
+    <div className="flex justify-center w-full p-4 z-10 fixed top-8 sm:top-4 sm:justify-start sm:left-40">
       <form
         ref={formRef}
-        className="w-96 h-max p-4 bg-white rounded-lg shadow-md"
+        className="w-96 max-h-full p-4 border border-gray-400 bg-white rounded-lg shadow-md"
         onSubmit={handleSubmit}
       >
+        <div className="max-w-full flex justify-end // sm:hidden">
+          <MdOutlineClear
+            onClick={() => setActiveComponent("x")}
+            className="text-xl text-red-700 mt-[-0.5rem] mb-2 flex justify-end "
+          />
+        </div>
         <div className="flex items-center justify-between">
           <label htmlFor="entidad" className="block font-bold mb-1">
             IVA:
@@ -39,10 +48,9 @@ const Iva = () => {
             type="number"
             maxLength={15}
             id="entidad"
-            className="w-50 p-1 mb-2 border rounded-sm"
+            className="w-20 p-1 mb-2 border rounded-sm"
             onChange={(e) => {
               const inputValue = e.target.value.slice(0, 3);
-              e.target.value = inputValue;
               handleChange(0, "ImpuestoValorAgregado", inputValue);
             }}
           />

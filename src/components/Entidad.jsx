@@ -1,9 +1,12 @@
-import React, { useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { useInvoiceContext } from "../Context/InvoiceContext";
+import { MdOutlineClear } from "react-icons/md";
+import { useFloatingWindow } from "../Context/ContextComponents";
 
 const Entidad = () => {
   const [entity, setEntity] = useState([]);
   const { handleInputEntity } = useInvoiceContext();
+  const { setActiveComponent } = useFloatingWindow();
   const formRef = useRef(null);
 
   const handleChange = (index, field, value) => {
@@ -27,9 +30,15 @@ const Entidad = () => {
     <div className="flex justify-center w-[100%] p-4 z-10 fixed top-8 // sm:top-4 sm:justify-start sm:w-auto sm:left-40">
       <form
         ref={formRef}
-        className="w-96 h-max p-4 bg-white rounded-lg shadow-md"
+        className="w-96 h-max p-4 border-[1px] border-gray-400 bg-white rounded-lg shadow-md"
         onSubmit={handleSubmit}
       >
+        <div className="max-w-full flex justify-end // sm:hidden">
+          <MdOutlineClear
+            onClick={() => setActiveComponent("x")}
+            className="text-xl text-red-700 mt-[-0.5rem] mb-2 flex justify-end "
+          />
+        </div>
         <div className="flex items-center justify-between">
           <label htmlFor="entidad" className="block font-bold mb-1">
             Entidad Bancaria:

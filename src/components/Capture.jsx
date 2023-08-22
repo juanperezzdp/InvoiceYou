@@ -1,11 +1,14 @@
 import React, { useState, useRef } from "react";
 import { useInvoiceContext } from "../Context/InvoiceContext";
+import { MdOutlineClear } from "react-icons/md";
+import { useFloatingWindow } from "../Context/ContextComponents";
 
 const Capture = () => {
   const videoRef = useRef(null);
   const [imageSrc, setImageSrc] = useState("loading");
   const [photosTaken, setPhotosTaken] = useState(0); // Nuevo estado para contar las fotos tomadas
   const { handleInputImg } = useInvoiceContext();
+  const { setActiveComponent } = useFloatingWindow();
 
   const startCamera = async () => {
     setImageSrc(null);
@@ -37,7 +40,13 @@ const Capture = () => {
 
   return (
     <div className="flex justify-center w-[100%] p-4 z-10 fixed top-8 // sm:top-4 sm:justify-start sm:w-auto sm:left-40 ">
-      <div className="flex flex-col rounded-lg shadow-md bg-white p-4 w-80 // sm:w-96">
+      <div className="flex flex-col border-[1px] border-gray-400 rounded-lg shadow-md bg-white p-4 w-80 // sm:w-96">
+        <div className="max-w-full flex justify-end // sm:hidden">
+          <MdOutlineClear
+            onClick={() => setActiveComponent("x")}
+            className="text-xl text-red-700 mt-[-0.5rem] mb-2 flex justify-end "
+          />
+        </div>
         <div className="flex bg-slate-400 flex-col items-center justify-center h-52 // sm:h-64">
           {imageSrc && <img src={imageSrc} alt="" />}
           {imageSrc === null && <video ref={videoRef} autoPlay playsInline />}

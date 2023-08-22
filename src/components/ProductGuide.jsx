@@ -1,10 +1,18 @@
-import React from "react";
+import { useFloatingWindow } from "../Context/ContextComponents";
 import Gif from "../img/animation.mp4";
+import { MdOutlineClear } from "react-icons/md";
 
 const ProductGuide = () => {
+  const { setActiveComponent } = useFloatingWindow();
   return (
     <div className="flex justify-center w-[100%] p-4 z-10 fixed top-2  // sm:justify-start sm:w-auto sm:left-40 ">
-      <div className="overflow-hidden flex flex-col w-[20rem] h-[34.5rem] items-center bg-white rounded-lg shadow-md p-4 z-10 fixed top-4 mt-2  // sm:ml-4 sm:left-40 sm:top-2">
+      <div className="overflow-hidden flex flex-col w-[20rem] h-[34.5rem] border-[1px] border-gray-400 items-center bg-white rounded-lg shadow-md pl-4 pr-4 z-10 fixed top-4   // pt-2 sm:ml-4 sm:left-40 sm:top-2">
+        <div className="w-[100%] mb-[-0.3rem] flex justify-end // sm:hidden">
+          <MdOutlineClear
+            onClick={() => setActiveComponent("x")}
+            className="text-xl text-red-700 flex justify-end "
+          />
+        </div>
         <div>
           <h6 className="text-2xl text-indigo-900">
             ¡Bienvenido a InvoiceYou!
