@@ -1,11 +1,26 @@
 import { useForm } from "react-hook-form";
-import { registerRequest } from "../api/auth";
+import { useAuth } from "../Context/authcontext";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Register = () => {
-  const { register, handleSubmit } = useForm();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+  const { signup, isAuthenticated, errors: registerErrors } = useAuth();
 
-  const onSubmit = handleSubmit(async (value) => {
-    await registerRequest(value);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate("/invoice");
+    }
+  }, [isAuthenticated, navigate]);
+
+  const onSubmit = handleSubmit(async (values) => {
+    signup(values);
   });
 
   return (
@@ -37,6 +52,9 @@ const Register = () => {
             </div>
 
             <form className=" gap-10 mt-8 md:grid-cols-2" onSubmit={onSubmit}>
+              {registerErrors === true ? (
+                <div className="text-red-500">El correo ya existe</div>
+              ) : null}
               <div>
                 <label className="block mb-2 text-sm text-gray-600 dark:text-gray-200">
                   Name
@@ -47,6 +65,9 @@ const Register = () => {
                   placeholder="John"
                   className="block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-lg dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"
                 />
+                {errors.username && (
+                  <p className="text-red-500">El nombre es requerido</p>
+                )}
               </div>
 
               <div>
@@ -60,6 +81,9 @@ const Register = () => {
                   autoComplete="username"
                   className="block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-lg dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"
                 />
+                {errors.email && (
+                  <p className="text-red-500">El email es requerido</p>
+                )}
               </div>
 
               <div>
@@ -73,6 +97,9 @@ const Register = () => {
                   autoComplete="current-password"
                   className="block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-lg dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"
                 />
+                {errors.password && (
+                  <p className="text-red-500">la contraseña es requerido</p>
+                )}
               </div>
 
               <button
