@@ -11,6 +11,16 @@ import { InvoiceProvider } from "./Context/InvoiceContext";
 import Iva from "./components/Iva";
 import Entidad from "./components/Entidad";
 import Descripcion from "./components/Descripcion";
+import Cookies from "js-cookie";
+
+// Para obtener una cookie específica por su nombre
+const cookieValue = Cookies.get("nombreDeLaCookie");
+
+if (cookieValue) {
+  console.log(`El valor de la cookie 'nombreDeLaCookie' es: ${cookieValue}`);
+} else {
+  console.log("La cookie no existe o ha expirado.");
+}
 
 const App = () => {
   const { activeComponent } = useFloatingWindow();
