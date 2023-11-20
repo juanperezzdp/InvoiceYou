@@ -39,7 +39,6 @@ const App = () => {
         {activeComponent === "entidad" && <Entidad />}
         {activeComponent === "descripcion" && <Descripcion />}
         {activeComponent === "x" && null}
-
         <Invoice />
       </InvoiceProvider>
     </>
